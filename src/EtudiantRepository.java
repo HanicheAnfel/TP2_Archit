@@ -3,6 +3,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.sql.ResultSet;
 
 public class EtudiantRepository implements Student_Interface {
 	
@@ -63,5 +65,24 @@ public class EtudiantRepository implements Student_Interface {
 		//connect.close();
 		return false;
 	}
+	 @Override
+	    public ArrayList<Etudiant> getEtudiants() throws SQLException {
+
+	    	ArrayList<Etudiant> etudiants = new ArrayList<Etudiant>();
+
+	    	DBConnection BD= DBConnection.getInstance();
+			Connection connect= BD.getConn();
+
+			Statement stmt = connect.createStatement();
+			String sql = "SELECT * FROM etudiant";
+			ResultSet rs = stmt.executeQuery(sql);
+			while(rs.next()) {
+				Etudiant S = new Etudiant(rs.getInt(1),rs.getString(2), rs.getString(3), rs.getString(4),null,rs.getInt(7));
+				etudiants.add(S);
+			}
+
+
+			return etudiants;
+	    }
 
 }

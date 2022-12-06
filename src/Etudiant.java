@@ -1,4 +1,4 @@
-
+import java.sql.SQLException;
 public class Etudiant {
 
 		private int matricule;
@@ -101,7 +101,18 @@ public class Etudiant {
 		public void setPwd(String pwd) {
 			this.pwd = pwd;
 		}
+		public void Bonus(Universite university)throws SQLException {
+			if(university.getPack()== TypePackage.Premium)
+			{
+				setNbLivreMensuel_Autorise(this.nbLivreMensuel_Autorise +=10);
+			}
+			else if(university.getPack()== TypePackage.Standard) {
+				setNbLivreMensuel_Autorise(this.nbLivreMensuel_Autorise +=5);
 
+			}
+			}
 		
+ 
 		
-	    }
+}
+	    

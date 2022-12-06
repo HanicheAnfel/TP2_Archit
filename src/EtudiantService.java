@@ -53,6 +53,14 @@ public class EtudiantService {
 	    
 		
 	}
+	public void ajoutBonus() throws SQLException {
+		ArrayList<Etudiant> etudiants = Student_rep.getEtudiants();
+
+		for(Etudiant S : etudiants) {
+			Universite univ = University_rep.GetById(S.getId_universite(), journal);
+			S.Bonus(univ);
+		}
+	}
 	
 	
 	
