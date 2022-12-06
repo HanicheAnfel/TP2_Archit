@@ -1,18 +1,13 @@
-
-
 	import javax.swing.JOptionPane;
 	import java.awt.Component;
 	import javax.swing.JLabel;
 	import java.awt.Container;
 	import java.awt.Image;
-
 	import javax.swing.border.Border;
 	import javax.swing.border.EmptyBorder;
-
 	import java.awt.LayoutManager;
 	import java.awt.event.ActionEvent;
 	import java.awt.event.ActionListener;
-
 	import javax.swing.Icon;
 	import javax.swing.ImageIcon;
 	import javax.swing.JButton;
@@ -20,7 +15,7 @@
 	import javax.swing.JTextField;
 	import javax.swing.JPanel;
 	import javax.swing.JFrame;
-	public class ViewInscription extends JFrame {
+	public class ViewInscription extends JFrame implements View_Inscription_Interface {
 
 	    private JFrame Jframe;
 	    private JPanel Panel;
@@ -107,51 +102,35 @@
 	        this.Panel.add(UnivId);
 
 
-	     // Bouton valider
-
-	        Image imgV = new ImageIcon("C:\\Users\\toshiba\\Desktop\\TPArchiGit\\TP2\\src\\valider.png").getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT);
-
-	        Icon iconV = new ImageIcon(imgV);
-	        this.valider = new JButton("valider" ,iconV);
-	        valider.setBounds(270, 250, 140, 40);
-	        this.Panel.add(valider);
-
-	     // Bouton annuler
-
-	        Image imgA = new ImageIcon("C:\\Users\\toshiba\\Desktop\\TPArchiGit\\TP2\\src\\annuler.png").getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT);
-
-	        Icon iconA= new ImageIcon(imgA);
-	        this.annuler = new JButton("Annuler",iconA);
-	        annuler.setBounds(120, 250, 140, 40);
-	        this.Panel.add(annuler); 
-
+	   
 	    }
+	    @Override
 
 	    public String Get_Mat() {
 	        return this.Matricule.getText();
 	    }
-
+	    @Override
 	    public String Get_Name() {
 	        return this.Nom.getText();
 	    }
-
+	    @Override
 	    public String Get_Prenom() {
 	        return this.Prenom.getText();
 	    }
-
+	    @Override
 	    public String Get_email() {
 	        return this.Email.getText();
 	    }
-
+	    @Override
 
 		public String Get_pwd() {
 	        return this.Pwd.getText();
 	    }
-
+	    @Override
 	    public String Get_id_univ() {
 	        return this.UnivId.getText();
 	    }
-
+	    @Override
 	    public boolean champsValides() {
 	        if (Get_Mat().isEmpty() || Get_Prenom().isEmpty() || Get_Name().isEmpty() || Get_email().isEmpty() || Get_pwd().isEmpty() || Get_id_univ().isEmpty()) {
 	            this.DisplayErreur("Veuillez remplir tous les champs!");
@@ -167,24 +146,24 @@
 	        }
 	        return true;
 	    }
-
+	    @Override
 
 	    public void DisplayForm() { 
 	        this.Create();
 	        this.Jframe.setVisible(true);
 	    }
-
+	    @Override
 	    public void addValiderListener(ActionListener listenForCalcButton) {
 	    	valider.addActionListener(listenForCalcButton);
 	    }
-
+	    @Override
 	    public void addAnnulerListener(ActionListener listenForCalcButton) {
 	    	annuler.addActionListener(listenForCalcButton);
 	    }
 	    public void Annuler_Inscription() {
 	        this.Jframe.dispose();
 	    }
-
+	    @Override
 	    public void Reset_Champs() {
 	        this.Matricule.setText("");
 	        this.Nom.setText("");
@@ -194,11 +173,11 @@
 	        this.UnivId.setText("");
 	    }
 
-
+	    @Override
 	    public void DisplayDialog(final String msg) {
 	        JOptionPane.showMessageDialog(this, msg);
 	    }
-
+	    @Override
 	    public void DisplayErreur(final String msg) {
 	        JOptionPane.showMessageDialog(this, msg, "Erreur", 0);
 	    }
@@ -206,4 +185,4 @@
 
 	}
 
-}
+
