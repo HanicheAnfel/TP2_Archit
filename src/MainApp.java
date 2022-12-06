@@ -7,6 +7,8 @@ public class MainApp {
 
 
 		EtudiantService serv=new EtudiantService();
+		serv.setStudent_rep(new EtudiantRepository());
+		serv.setUniversity_rep(new UniversiteRepository());
 		try {
 			serv.inscription(2, "Guendouziiiii", "wassila", "guen@gmail.com","xxxx", 1);
 			

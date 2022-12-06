@@ -5,27 +5,45 @@ import java.sql.Statement;
 import java.util.ArrayList;
 public class EtudiantService {
 	
+	private Student_Interface Student_rep;
+	private Univ_Interface University_rep;
+	private IJournal journal;
+	
+		public void setStudent_rep(Student_Interface Student_rep) {
+			this.Student_rep=Student_rep;
+		}
+		public void setUniversity_rep(Univ_Interface University_rep) {
+			this.University_rep=University_rep;
+		}
+		public void setJournal( IJournal journal) {
+			this.journal=journal;
+		}
+		public IJournal getJournal( IJournal journal) {
+			 return  this.journal;
+		}
+	
+	
 	
 	boolean inscription (int matricule, String nom, String prénom, String email,String pwd, int id_universite) throws SQLException	
 	{
-		EtudiantRepository StudRep= new EtudiantRepository();
-	    UniversiteRepository UnivRep= new UniversiteRepository();
-	    Etudiant stud = new Etudiant(matricule, nom, prénom, email,pwd,id_universite);
-	    Universite univ=UnivRep.GetById(id_universite);
+		Student_Interface Student_rep= new EtudiantRepository();
+		Univ_Interface University_rep= new UniversiteRepository();
+	    Etudiant student = new Etudiant(matricule, nom, prénom, email,pwd,id_universite);
+	    Universite univ=University_rep.GetById(id_universite,journal);
 	    
-	    System.out.println("Log: début de l'opération d'ajout de l'étudiant avec matricule "+matricule);
+	    journal.outPut_Msg("Log: début de l'opération d'ajout de l'étudiant avec matricule "+matricule);
 	    
 	    if(email == null || email.length() == 0)
 	    {
 	    	return false;
 	    }
 	    
-	    if (StudRep.Exists(matricule))
+	    if (Student_rep.Exists(matricule,journal))
 	    {
 	        return false;
 	    }
 	    
-		if (StudRep.Exists(email))
+		if (Student_rep.Exists(email,journal))
 	    {
 	        return false;
 	    }
@@ -34,15 +52,15 @@ public class EtudiantService {
 		
 		 if (univ.getPack() == TypePackage.Standard)
 	     {
-	          stud.setNbLivreMensuel_Autorise(10);
+	          student.setNbLivreMensuel_Autorise(10);
 	     }
 	     else if (univ.getPack() == TypePackage.Premium)
 	     {
-	    	 stud.setNbLivreMensuel_Autorise(10*2);
+	    	 student.setNbLivreMensuel_Autorise(10*2);
 	     }                           
 	     
-		 StudRep.add(stud);
-		 System.out.println("Log: Fin de l'opération d'ajout de l'étudiant avec matricule "+matricule);
+		 Student_rep.add(student,journal);
+		 journal.outPut_Msg("Log: Fin de l'opération d'ajout de l'étudiant avec matricule "+matricule);
 		 return true;
 	    
 		

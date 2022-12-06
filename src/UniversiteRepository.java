@@ -5,17 +5,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class UniversiteRepository {
+public class UniversiteRepository implements Univ_Interface {
 	
-	
-	Universite GetById(int universityId) throws SQLException {
+	@Override
+	public Universite GetById(int univid)throws SQLException{
 		
 		DBConnection BD= DBConnection.getInstance();
 		Connection connect= BD.getConn(); 
 		Statement stmt = connect.createStatement();
 		System.out.println("LogBD : début recherche de id université dans la base de donnée");
 		
-		String sql = "Select * From universite WHERE id_universite="+ universityId;
+		String sql = "Select * From universite WHERE id_universite="+ univid;
 		ResultSet rs = stmt.executeQuery(sql);
 		rs.next();	
 		TypePackage p=TypePackage.valueOf(rs.getString(3));
