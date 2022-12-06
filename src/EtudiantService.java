@@ -12,6 +12,9 @@ public class EtudiantService {
 		public void setStudent_rep(Student_Interface Student_rep) {
 			this.Student_rep=Student_rep;
 		}
+		public  Student_Interface getStudent_rep() {
+			 return this.Student_rep;
+		}
 		public void setUniversity_rep(Univ_Interface University_rep) {
 			this.University_rep=University_rep;
 		}
@@ -33,21 +36,6 @@ public class EtudiantService {
 	    
 	    journal.outPut_Msg("Log: début de l'opération d'ajout de l'étudiant avec matricule "+matricule);
 	    
-	    if(email == null || email.length() == 0)
-	    {
-	    	return false;
-	    }
-	    
-	    if (Student_rep.Exists(matricule,journal))
-	    {
-	        return false;
-	    }
-	    
-		if (Student_rep.Exists(email,journal))
-	    {
-	        return false;
-	    }
-		
 		
 		
 		 if (univ.getPack() == TypePackage.Standard)
