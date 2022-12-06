@@ -10,12 +10,12 @@ public class UniversiteRepository {
 	
 	Universite GetById(int universityId) throws SQLException {
 		
-		DBConnection BD= new DBConnection();
-		Connection connect=BD.getConn(); 
+		DBConnection BD= DBConnection.getInstance();
+		Connection connect= BD.getConn(); 
 		Statement stmt = connect.createStatement();
 		System.out.println("LogBD : début recherche de id université dans la base de donnée");
 		
-		String sql = "select * from universite where id_universite="+ universityId;
+		String sql = "Select * From universite WHERE id_universite="+ universityId;
 		ResultSet rs = stmt.executeQuery(sql);
 		rs.next();	
 		TypePackage p=TypePackage.valueOf(rs.getString(3));
@@ -23,7 +23,7 @@ public class UniversiteRepository {
 			
 		System.out.println("LogBD : université récupérée");
 		
-		connect.close();
+		//connect.close();
 		return u;	
 	
 		
